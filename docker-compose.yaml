@@ -1,5 +1,6 @@
 include:
   - apps/autorestic/docker-compose.yaml
+  - apps/bar-assistant/docker-compose.yaml
   - apps/caddy/docker-compose.yaml
   - apps/catbot/docker-compose.yaml
   - apps/freshrss/docker-compose.yaml

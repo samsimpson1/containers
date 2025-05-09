@@ -74,6 +74,19 @@
     reverse_proxy http://audiobookshelf:8080
   }
 
+  @barassistant host bar.srv.simpson.id
+  handle @barassistant {
+    handle_path /bar/* {
+      reverse_proxy http://ba-bar-assistant:8080
+    }
+    handle_path /search/* {
+      reverse_proxy /searc/* http://ba-meilisearch:7700
+    }
+    handle_path /* {
+      reverse_proxy http://ba-salt-rim:8080
+    }
+  }
+
   @grafana host grafana.srv.simpson.id
   handle @grafana {
     reverse_proxy http://grafana:3000
