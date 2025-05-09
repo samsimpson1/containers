@@ -45,6 +45,9 @@ services:
       - /srv/containers/storage/ssd/sharex:/sharex:ro
     depends_on:
       - audiobookshelf
+      - ba-bar-assistant
+      - ba-meilisearch
+      - ba-salt-rim
       - freshrss
       - garage
       - grafana

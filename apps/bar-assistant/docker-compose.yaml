@@ -1,0 +1,36 @@
+services:
+  ba-meilisearch:
+    image: getmeili/meilisearch:v1.12
+    environment:
+      - MEILI_NO_ANALYTICS=true
+      - MEILI_ENV=production
+    env_file: "/srv/containers/storage/ssd/secrets/Bar Assistant.env"
+    restart: unless-stopped
+    volumes:
+      - /srv/containers/storage/ssd/bar-assistant/meilisearch:/meili_data
+  ba-redis:
+    image: valkey/valkey:8.1
+    restart: unless-stopped
+  ba-bar-assistant:
+    image: barassistant/server:v5
+    depends_on:
+      - ba-meilisearch
+      - ba-redis
+    environment:
+      - APP_URL=https://bar.srv.simpson.id/bar
+      - MEILISEARCH_HOST=http://ba-meilisearch:7700
+      - REDIS_HOST=ba-redis
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
+      - ALLOW_REGISTRATION=false
+    env_file: "/srv/containers/storage/ssd/secrets/Bar Assistant.env"
+    volumes:
+      - /srv/containers/storage/ssd/bar-assistant/ba:/var/www/cocktails/storage/bar-assistant
+  ba-salt-rim:
+    image: barassistant/salt-rim:v4
+    depends_on:
+      - ba-bar-assistant
+      - ba-meilisearch
+    environment:
+      - API_URL=https://bar.srv.simpson.id/bar
+      - MEILISEARCH_URL=https://bar.srv.simpson.id/search
