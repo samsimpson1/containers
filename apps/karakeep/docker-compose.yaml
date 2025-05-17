@@ -11,6 +11,7 @@ services:
       BROWSER_WEB_URL: http://karakeep-chrome:9222
       DATA_DIR: /data
       NEXTAUTH_URL: https://bookmarks.srv.simpson.id
+      DISABLE_SIGNUPS: "true"
   karakeep-chrome:
     image: gcr.io/zenika-hub/alpine-chrome:123
     restart: unless-stopped
