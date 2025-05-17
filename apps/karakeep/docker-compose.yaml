@@ -1,0 +1,32 @@
+services:
+  karakeep-web:
+    image: ghcr.io/karakeep-app/karakeep:0.24.1
+    restart: unless-stopped
+    volumes:
+      - /srv/containers/storage/ssd/karakeep/web:/data
+    env_file:
+      - /srv/containers/storage/ssd/secrets/Karakeep.env
+    environment:
+      MEILI_ADDR: http://karakeep-meilisearch:7700
+      BROWSER_WEB_URL: http://karakeep-chrome:9222
+      DATA_DIR: /data
+      NEXTAUTH_URL: https://bookmarks.srv.simpson.id
+  karakeep-chrome:
+    image: gcr.io/zenika-hub/alpine-chrome:123
+    restart: unless-stopped
+    command:
+      - --no-sandbox
+      - --disable-gpu
+      - --disable-dev-shm-usage
+      - --remote-debugging-address=0.0.0.0
+      - --remote-debugging-port=9222
+      - --hide-scrollbars
+  karakeep-meilisearch:
+    image: getmeili/meilisearch:v1.13.3
+    restart: unless-stopped
+    env_file:
+      - /srv/containers/storage/ssd/secrets/Karakeep.env
+    environment:
+      MEILI_NO_ANALYTICS: "true"
+    volumes:
+      - /srv/containers/storage/ssd/karakeep/meilisearch:/meili_data
