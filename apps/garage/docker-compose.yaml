@@ -1,6 +1,6 @@
 services:
   garage:
-    image: dxflrs/amd64_garage:v1.0.1
+    image: dxflrs/amd64_garage:v1.2.0
     restart: unless-stopped
     user: "568"
     env_file: /srv/containers/storage/ssd/secrets/Garage.env
