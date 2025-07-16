@@ -129,6 +129,13 @@
       reverse_proxy http://pinchflat:8945
     }
   }
+
+  @pocketid host pocket-id.srv.simpson.id
+  handle @pocketid {
+    route {
+      reverse_proxy http://pocket-id:1411
+    }
+  }
   
   @rss host rss.srv.simpson.id
   handle @rss {
