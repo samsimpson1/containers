@@ -48,7 +48,6 @@ services:
       - ba-bar-assistant
       - ba-meilisearch
       - ba-salt-rim
-      - freshrss
       - garage
       - grafana
       - home-assistant
