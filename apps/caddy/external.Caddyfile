@@ -96,7 +96,7 @@
   handle @grafana {
     reverse_proxy http://grafana:3000
   }
-  
+
   @hass host hass.srv.simpson.id
   handle @hass {
     reverse_proxy http://home-assistant:8123
@@ -136,7 +136,7 @@
       reverse_proxy http://pocket-id:1411
     }
   }
-  
+
   @rss host rss.srv.simpson.id
   handle @rss {
     reverse_proxy http://freshrss:80
@@ -163,13 +163,13 @@ sams.wtf {
 }
 
 s3.sams.wtf {
-  reverse_proxy http://garage:3900
+  reverse_proxy http://10.0.0.191:3900
 }
 
 *.s3.sams.wtf {
-  reverse_proxy http://garage:3900
+  reverse_proxy http://10.0.0.191:3900
 }
 
 *.site.s3.sams.wtf {
-  reverse_proxy http://garage:3902
+  reverse_proxy http://10.0.0.191:3902
 }
