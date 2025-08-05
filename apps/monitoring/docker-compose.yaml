@@ -1,4 +1,0 @@
-include:
-  - grafana.yaml
-  - prometheus.yaml
-  - node-exporter.yaml
