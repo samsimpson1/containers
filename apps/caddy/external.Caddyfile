@@ -8,31 +8,26 @@
   debug
 
   security {
-    oauth identity provider discord {
-      realm discord
-      driver discord
-      client_id {$CADDY_SECURITY_CLIENT_ID}
-      client_secret {$CADDY_SECURITY_CLIENT_SECRET}
-      scopes identify email guilds guilds.members.read
-      user_group_filters {$CADDY_SECURITY_GUILD_ID}
+    oauth identity provider generic {
+      realm generic
+      driver generic
+      client_id {$POCKETID_CLIENT_ID}
+      client_secret {$POCKETID_CLIENT_SECRET}
+      scopes openid email profile
+      base_auth_url https://pocket-id.srv.simpson.id/
+      metadata_url http://pocket-id:1411/.well-known/openid-configuration
     }
 
-    authentication portal discordportal {
+    authentication portal generic {
       crypto default token lifetime 3600
       crypto key sign-verify {$CADDY_SECURITY_JWT_SHARED_SECRET}
-      enable identity provider discord
       cookie domain simpson.id
-
-      transform user {
-        match role discord.com/{$CADDY_SECURITY_GUILD_ID}/role/{$CADDY_SECURITY_ADMIN_ROLE_ID}
-        action add role authp/admin
-      }
     }
 
     authorization policy authpol {
       set auth url https://auth.srv.simpson.id/
       crypto key verify {$CADDY_SECURITY_JWT_SHARED_SECRET}
-      allow roles authp/admin
+      allow roles authp/admin authp/user
       validate bearer header
       inject headers with claims
     }
@@ -40,7 +35,7 @@
     authorization policy pinchflat {
       set auth url https://auth.srv.simpson.id/
       crypto key verify {$CADDY_SECURITY_JWT_SHARED_SECRET}
-      allow roles authp/admin
+      allow roles authp/admin authp/user
       validate bearer header
       inject headers with claims
 
@@ -56,7 +51,7 @@
   @auth host auth.srv.simpson.id
   handle @auth {
     route {
-      authenticate with discordportal
+      authenticate with generic
     }
   }
 
@@ -95,6 +90,14 @@
   @actual host budget.srv.simpson.id
   handle @actual {
     reverse_proxy http://actual:5006
+  }
+
+  @firefly host firefly.srv.simpson.id
+  handle @firefly {
+    route {
+      authorize with pocketidpol
+      reverse_proxy http://firefly:80
+    }
   }
 
   @grafana host grafana.srv.simpson.id
