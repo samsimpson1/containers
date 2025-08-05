@@ -97,6 +97,11 @@
     reverse_proxy http://actual:5006
   }
 
+  @firefly host firefly.srv.simpson.id
+  handle @firefly {
+    reverse_proxy http://firefly-oauth2-proxy:4180
+  }
+
   @grafana host grafana.srv.simpson.id
   handle @grafana {
     reverse_proxy http://grafana:3000
