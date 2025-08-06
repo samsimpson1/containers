@@ -9,6 +9,11 @@
 }
 
 *.int.simpson.id {
+  @firefly-di host firefly-di.int.simpson.id
+  handle @firefly-di {
+    reverse_proxy http://firefly-iii-data-importer:8080
+  }
+
   @garage host garage.int.simpson.id
   handle @garage {
     reverse_proxy http://10.0.0.191:3903
