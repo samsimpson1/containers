@@ -1,5 +1,4 @@
 include:
-  - arr.yaml
   - audiobookshelf.yaml
   - jellyfin.yaml
   - komga.yaml
