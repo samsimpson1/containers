@@ -1,6 +1,6 @@
 services:
   pinchflat:
-    image: ghcr.io/kieraneglin/pinchflat:v2025.3.17
+    image: ghcr.io/kieraneglin/pinchflat:v2025.6.6
     restart: unless-stopped
     user: "568"
     environment:
