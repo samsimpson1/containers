@@ -1,6 +1,6 @@
 services:
   ba-meilisearch:
-    image: getmeili/meilisearch:v1.12
+    image: getmeili/meilisearch:v1.17
     environment:
       - MEILI_NO_ANALYTICS=true
       - MEILI_ENV=production
