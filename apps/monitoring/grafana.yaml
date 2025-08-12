@@ -8,3 +8,4 @@ services:
     volumes:
       - /srv/containers/storage/ssd/grafana:/var/lib/grafana
       - /srv/containers/storage/ssd/stonks:/stonks
+      - /srv/containers/storage/ssd/nutrition:/nutrition
