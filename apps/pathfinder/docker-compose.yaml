@@ -1,6 +1,6 @@
 services:
   pathfinder-redis:
-    image: redis:7
+    image: redis:8
     restart: unless-stopped
     volumes:
       - /srv/containers/storage/pathfinder/redis:/data
