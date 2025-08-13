@@ -1,6 +1,6 @@
 services:
   prometheus-node-exporter:
-    image: prom/node-exporter:v1.8.2
+    image: prom/node-exporter:v1.9.1
     network_mode: host
     pid: host
     command: --path.rootfs=/host
