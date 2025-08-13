@@ -1,6 +1,0 @@
-include:
-  - komga.yaml
-  - overseerr.yaml
-  - pinchflat.yaml
-  - slskd.yaml
-  - unpackerr.yaml
